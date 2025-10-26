@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Transverb — Real-time Multilingual Messaging</title>
+  <meta name="description" content="Transverb lets people text naturally while messages are translated instantly on both sides. Communicate clearly—across languages." />
+  <link rel="icon" href="assets/favicon.png" />
+
+  <!-- Social share -->
+  <meta property="og:title" content="Transverb — Real-time Multilingual Messaging" />
+  <meta property="og:description" content="Text in your language. They read in theirs. Real-time translation in a familiar, private messenger." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/og-image.jpg" />
+
+  <style>
+    :root{
+      /* Corporate, accessible blue/white palette */
+      --ink:#0a0f1a;         /* primary text */
+      --dim:#5b6472;         /* secondary text */
+      --bg:#f7f9fc;          /* page background */
+      --panel:#ffffff;       /* card/section surface */
+      --line:#e6ecf3;        /* dividers */
+      --blue:#0a66c2;        /* primary brand blue */
+      --blue-600:#125ea9;
+      --blue-050:#eaf3ff;
+      --max:1140px;
+      --r:16px;
+      --shadow:0 10px 30px rgba(20,45,80,.08);
+      --padX:clamp(16px,4vw,28px);
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Inter,Roboto,Arial,sans-serif}
+    img{max-width:100%;height:auto;display:block}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--padX)}
+
+    /* ---------- Header ---------- */
+    header{
+      position:sticky;top:0;z-index:10;background:rgba(255,255,255,.86);
+      backdrop-filter:saturate(1.1) blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:12px 0;
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:36px;height:36px;border-radius:10px;
+      background:linear-gradient(135deg,#0a66c2,#3aa1ff);
+      box-shadow:0 6px 18px rgba(10,102,194,.28);
+    }
+    .brand b{font-weight:700; letter-spacing:.2px}
+    .tag{font-size:.9rem;color:var(--dim)}
+
+    .nav-cta a{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 14px;border-radius:12px;font-weight:600;border:1px solid var(--blue);
+      color:#fff;background:var(--blue);
+    }
+    .nav-cta a:hover{background:var(--blue-600);border-color:var(--blue-600)}
+
+    /* ---------- HERO ---------- */
+    .hero{
+      position:relative;overflow:hidden;border-bottom:1px solid var(--line);
+      background-color:#ffffff;
+      /* Abstract geometric blue tile pattern (inline SVG) */
+      background-image:
+        url("data:image/svg+xml;utf8,\
+        <svg xmlns='http://www.w3.org/2000/svg' width='360' height='360' viewBox='0 0 360 360'>\
+          <defs>\
+            <linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>\
+              <stop offset='0' stop-color='%23eaf3ff'/>\
+              <stop offset='1' stop-color='%23ffffff'/>\
+            </linearGradient>\
+            <pattern id='tiles' width='72' height='72' patternUnits='userSpaceOnUse'>\
+              <rect width='72' height='72' fill='url(%23g)'/>\
+              <path d='M0 36 L36 0 L72 36 L36 72 Z' fill='none' stroke='%23d8e6f7' stroke-width='1'/>\
+              <circle cx='36' cy='36' r='6' fill='%231869e0' opacity='.15'/>\
+            </pattern>\
+          </defs>\
+          <rect width='100%' height='100%' fill='url(%23tiles)'/>\
+        </svg>");
+      background-size:cover;
+    }
+    .hero .inner{
+      display:grid;grid-template-columns:1fr;gap:14px;
+      padding:clamp(42px,9vw,96px) 0;
+    }
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:6px 10px;border-radius:999px;border:1px solid #cfe2ff;
+      color:#084298;background:#eff6ff;font-size:.85rem;text-transform:uppercase;letter-spacing:.3px;
+      width:max-content;
+    }
+    h1{
+      margin:6px 0 4px;font-size:clamp(28px,6vw,50px);line-height:1.1;letter-spacing:-.3px;
+    }
+    .tagline{color:#1f2937;max-width:840px}
+    .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:12px;
+      font-weight:700;background:var(--blue);color:#fff;border:1px solid var(--blue);box-shadow:var(--shadow)
+    }
+    .btn:hover{background:var(--blue-600);border-color:var(--blue-600)}
+    .btn.secondary{
+      background:#fff;color:var(--blue);border:1px solid var(--blue);
+      box-shadow:none;
+    }
+    .proof{color:var(--dim);display:flex;align-items:center;gap:10px;margin-top:8px}
+    .dot{width:6px;height:6px;border-radius:50%;background:var(--blue)}
+
+    /* ---------- Screenshots ---------- */
+    .gallery{
+      background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    }
+    .gallery .inner{padding:clamp(28px,7vw,56px) 0}
+    .section-title{margin:0 0 6px;font-size:clamp(22px,4.5vw,34px)}
+    .section-sub{color:var(--dim);margin:0 0 16px}
+    .grid{
+      display:grid;gap:16px;grid-template-columns:repeat(2,1fr)
+    }
+    @media (min-width:720px){ .grid{grid-template-columns:repeat(3,1fr)} }
+    @media (min-width:1024px){ .grid{grid-template-columns:repeat(4,1fr)} }
+    .shot{
+      background:#fff;border:1px solid var(--line);border-radius:18px;padding:10px;
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+    .shot:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(15,46,90,.12)}
+    .shot img{border-radius:12px}
+    .shot figcaption{color:var(--dim);font-size:.85rem;padding:8px 4px 0}
+
+    /* ---------- Why Transverb ---------- */
+    .why{background:var(--bg)}
+    .why .inner{padding:clamp(34px,8vw,84px) 0}
+    .cards{display:grid;gap:16px;grid-template-columns:1fr}
+    @media (min-width:900px){ .cards{grid-template-columns:repeat(3,1fr)} }
+    .card{
+      background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;min-height:160px
+    }
+    .card h3{margin:2px 0 6px;font-size:1.06rem}
+    .card p{color:var(--dim);margin:0}
+
+    /* ---------- Footer ---------- */
+    footer{border-top:1px solid var(--line);background:#fff}
+    footer .inner{padding:18px 0;color:var(--dim);display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+    .foot-links{display:flex;gap:16px;flex-wrap:wrap}
+    .foot-links a{color:var(--dim)}
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="wrap nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <b>Transverb</b><br />
+          <span class="tag">Real-time Multilingual Messaging</span>
+        </div>
+      </div>
+      <div class="nav-cta">
+        <a href="https://apps.apple.com/us/app/transverb/id1606570882?platform=ipad" target="_blank" rel="noopener" aria-label="Download Transverb on the App Store">
+          <!-- Apple icon -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M19.665 17.278c-.327.755-.714 1.451-1.16 2.089-.61.88-1.105 1.485-1.484 1.817-.593.545-1.23.825-1.91.84-.487 0-1.075-.138-1.764-.413-.69-.275-1.325-.413-1.903-.413-.6 0-1.25.138-1.95.413-.7.275-1.263.418-1.69.428-.658.028-1.31-.262-1.957-.87-.42-.368-.936-1.003-1.55-1.906-.665-.985-1.21-2.129-1.633-3.432-.456-1.419-.683-2.79-.683-4.114 0-1.52.33-2.826.99-3.92.518-.879 1.2-1.576 2.047-2.091.846-.515 1.76-.782 2.742-.803.539 0 1.245.16 2.116.48.871.32 1.433.482 1.684.482.205 0 .792-.19 1.761-.57.946-.363 1.744-.513 2.393-.452 1.77.142 3.104.84 4.001 2.092-1.59.963-2.382 2.312-2.376 4.046.006 1.35.5 2.477 1.48 3.38.44.41.934.726 1.48.948-.118.34-.243.661-.376.963zM15.75 2.48c0 .973-.357 1.875-1.07 2.707-.861 1.007-1.9 1.593-3.026 1.5-.013-.118-.02-.237-.02-.357 0-.935.372-1.93 1.093-2.824.35-.45.795-.825 1.331-1.125.535-.3 1.04-.464 1.516-.5.012.2.018.4.018.6z"/>
+          </svg>
+          <span>App Store</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" aria-label="Intro">
+    <div class="wrap inner">
+      <span class="eyebrow">Built for clear communication</span>
+      <h1>Text naturally. We handle the translation in real time.</h1>
+      <p class="tagline">
+        Transverb is a private, real-time multilingual messenger. You write in your language; they read in theirs—no copy-paste, no switching apps.
+      </p>
+      <div class="cta-row">
+        <a class="btn" href="https://apps.apple.com/us/app/transverb/id1606570882?platform=ipad" target="_blank" rel="noopener">Download on the App Store</a>
+        <a class="btn secondary" href="#screens">See screenshots</a>
+      </div>
+      <div class="proof"><span class="dot"></span> Designed with reliability and clarity in mind.</div>
+    </div>
+  </section>
+
+  <!-- Screenshots -->
+  <section id="screens" class="gallery" aria-label="App Store Screenshots">
+    <div class="wrap inner">
+      <h2 class="section-title">How Transverb looks</h2>
+      <p class="section-sub">Familiar chat UI, live translations, and thoughtful controls.</p>
+      <div class="grid">
+        <!-- Replace these paths with your real App Store images -->
+        <figure class="shot">
+          <img src="assets/screen-1.png" alt="Chats list showing conversations in multiple languages" loading="lazy" />
+          <figcaption>Chats list</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/screen-2.png" alt="Live translation inside a conversation thread" loading="lazy" />
+          <figcaption>Live translation</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/screen-3.png" alt="Language preferences and detection settings" loading="lazy" />
+          <figcaption>Language settings</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/screen-4.png" alt="Media and attachments in translated chats" loading="lazy" />
+          <figcaption>Media support</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/screen-5.png" alt="Privacy and security options" loading="lazy" />
+          <figcaption>Privacy controls</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/screen-6.png" alt="Start a new chat with language selection" loading="lazy" />
+          <figcaption>New chat flow</figcaption>
+        </figure>
+      </div>
+      <div class="cta-row" style="margin-top:22px">
+        <a class="btn" href="https://apps.apple.com/us/app/transverb/id1606570882?platform=ipad" target="_blank" rel="noopener">Get Transverb on the App Store</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Transverb -->
+  <section class="why" aria-label="Why Transverb">
+    <div class="wrap inner">
+      <h2 class="section-title">Why teams and communities choose Transverb</h2>
+      <p class="section-sub">Because communication should be natural—even when languages differ.</p>
+      <div class="cards">
+        <article class="card">
+          <h3>Real-time, two-way translation</h3>
+          <p>Each person writes in their own language. Messages appear translated instantly on both sides—no copy-paste, no context switching.</p>
+        </article>
+        <article class="card">
+          <h3>Familiar messaging UX</h3>
+          <p>Typing indicators, media, and clean threads—all with translations built in. Minimal learning curve for users and teams.</p>
+        </article>
+        <article class="card">
+          <h3>Privacy-minded</h3>
+          <p>Clear defaults and transparent controls so conversations stay personal. You decide what to share.</p>
+        </article>
+        <article class="card">
+          <h3>For work, travel, community</h3>
+          <p>From global teammates to neighborhood groups, bridge language gaps without friction or delays.</p>
+        </article>
+        <article class="card">
+          <h3>Set it & forget it</h3>
+          <p>Choose your languages once. Transverb remembers preferences so every chat just works.</p>
+        </article>
+        <article class="card">
+          <h3>Built for clarity</h3>
+          <p>Readable translations with original text available on tap—so nuance and intent stay intact.</p>
+        </article>
+      </div>
+
+      <div class="cta-row" style="margin-top:24px">
+        <a class="btn" href="https://apps.apple.com/us/app/transverb/id1606570882?platform=ipad" target="_blank" rel="noopener">Download free on the App Store</a>
+        <a class="btn secondary" href="#screens">Preview screenshots</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="wrap inner">
+      <div>© <span id="y"></span> Transverb</div>
+      <nav class="foot-links" aria-label="Footer">
+        <a href="mailto:hello@transverb.app">Contact</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    // Current year
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
