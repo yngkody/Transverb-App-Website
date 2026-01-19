@@ -693,6 +693,43 @@
     color: rgba(255,255,255,0.78);
   }
 }
+/* Floating app name in the HERO (not nav) */
+.hero-app-title{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+
+  /* Put it in that “empty” hero space */
+  top: calc(env(safe-area-inset-top, 0px) + 56px);
+
+  height: 44px;                 /* iOS-ish */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: rgba(255,255,255,0.86);
+
+  pointer-events: none;
+  user-select: none;
+
+  /* Prevent overlap with your right-side pills on small screens */
+  max-width: calc(100% - 220px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Desktop: give it even more breathing room if you want */
+@media (min-width: 900px){
+  .hero-app-title{
+    top: calc(env(safe-area-inset-top, 0px) + 64px);
+    max-width: 70vw;
+  }
+}
 
 
   </style>
@@ -705,6 +742,8 @@
     <img class="hero-media" src="transverb-hero iv.png" alt="" aria-hidden="true" />
     <!-- Mobile hero image -->
     <img class="hero-media-mobile" src="transverb-hero-mobile ii.png" alt="" aria-hidden="true" />
+    
+    <div class="hero-app-title">Transverb</div>
 
    <nav class="nav" aria-label="Primary">
   <div class="nav-inner">
