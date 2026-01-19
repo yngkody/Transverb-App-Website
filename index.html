@@ -514,6 +514,49 @@
       .bubble{ max-width: 100%; }
       .bubble[style]{ margin-left: 0 !important; }
     }
+
+    @media (max-width: 520px){
+  /* keep nav from feeling huge */
+  .nav{ top: 14px; }
+
+  .nav-inner{
+    gap: 10px;
+  }
+
+  /* Capsule: allow wrapping + reduce padding */
+  .nav-links{
+    width: 100%;
+    max-width: 520px;
+    display: flex;
+    flex-wrap: wrap;                 /* ✅ allow wrap */
+    justify-content: space-between;  /* keeps “How it works” left, “Use cases” right */
+    align-items: center;
+    gap: 8px;
+    padding: 10px;
+    border-radius: 22px;             /* less “stadium” looking */
+  }
+
+  /* Make the two links sit on row 1 */
+  .nav-links a:not(.download){
+    flex: 1 1 auto;
+    text-align: left;
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+  .nav-links a:not(.download):last-of-type{
+    text-align: right;
+  }
+
+  /* Download takes full row 2 */
+  .nav-links .download{
+    flex: 1 0 100%;                  /* ✅ forces new line */
+    justify-content: center;
+    padding: 12px 14px;
+    margin-top: 2px;
+    border-radius: 18px;
+  }
+}
+
   </style>
 </head>
 
