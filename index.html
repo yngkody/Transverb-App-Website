@@ -664,6 +664,36 @@
   .brand span{ display:none; } /* optional, cleaner */
 }
 
+    /* Apple-style title inside the hero (NOT nav) */
+.hero-title{
+  position: absolute;
+  top: max(14px, env(safe-area-inset-top)); /* respects iPhone notch */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4; /* above background + overlay, below nav if needed */
+
+  height: 44px; /* iOS-ish */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: rgba(255,255,255,0.86);
+
+  pointer-events: none;
+  user-select: none;
+  text-rendering: optimizeLegibility;
+}
+
+/* If you want it even quieter on desktop */
+@media (min-width: 900px){
+  .hero-title{
+    color: rgba(255,255,255,0.78);
+  }
+}
+
 
   </style>
 </head>
@@ -683,8 +713,6 @@
       <span>Transverb</span>
     </a>
     
-    <div class="nav-title" aria-hidden="true">Transverb</div>
-
     <div class="nav-actions">
       <a class="download"
          href="https://apps.apple.com/"
@@ -713,7 +741,8 @@
 
     <div class="hero-content">
       <div class="content-inner">
-        <h1>Transverb</h1>
+        <div class="hero-title" aria-hidden="true">Transverb</div>
+
         <div class="kicker">Real-time messaging</div>
         <h1>Speak freely.<br/>Be understood.</h1>
         <p class="sub">
