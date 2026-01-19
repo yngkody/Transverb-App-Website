@@ -133,12 +133,69 @@
       /* optional: add gradients back if needed */
     }
 
+    /* ===== HERO WORDMARK (BIG "Transverb" in hero, not nav) ===== */
+    .hero-wordmark-wrap{
+      position:absolute;
+      left:0; right:0;
+      /* lives in that circled “empty” space */
+      top: clamp(110px, 18vh, 190px);
+      z-index: 3;
+      padding: 0 var(--pad);
+      pointer-events:none;
+      user-select:none;
+    }
+
+    .hero-wordmark{
+      max-width: var(--max);
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+      display: inline-block;
+
+      font-size: clamp(44px, 7vw, 92px);
+      font-weight: 850;
+      letter-spacing: -0.055em;
+      line-height: 0.95;
+      color: rgba(255,255,255,0.92);
+      text-rendering: optimizeLegibility;
+      white-space: nowrap;
+    }
+
+    /* soft “echo” behind like your screenshot */
+    .hero-wordmark::after{
+      content: attr(data-text);
+      position:absolute;
+      left: 0;
+      top: 0;
+      transform: translateY(14px);
+      color: rgba(255,255,255,0.22);
+      filter: blur(0px);
+      z-index: -1;
+      white-space: nowrap;
+    }
+
+    /* keep it from colliding with the right-side phone + pills on mobile */
+    @media (max-width: 520px){
+      .hero-wordmark-wrap{
+        top: calc(env(safe-area-inset-top, 0px) + 140px);
+      }
+      .hero-wordmark{
+        font-size: clamp(40px, 11vw, 64px);
+        max-width: 62vw;        /* prevents it from running into the phone area */
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .hero-wordmark::after{
+        transform: translateY(12px);
+      }
+    }
+
     /* NAV */
     .nav{
       position:absolute;
       top: 22px;
       left: 0; right: 0;
-      z-index: 5;
+      z-index: 10;
       padding: 0 var(--pad);
     }
 
@@ -148,7 +205,7 @@
       display:flex;
       align-items:center;
       justify-content: space-between;
-      gap: 14px;
+      gap: 12px;
     }
 
     .brand{
@@ -168,32 +225,10 @@
       box-shadow: 0 0 18px rgba(255,255,255,0.22);
     }
 
-    .nav-links{
+    .nav-actions{
       display:flex;
       align-items:center;
       gap: 10px;
-      padding: 8px;
-      border: 1px solid var(--hairline);
-      background: rgba(0,0,0,0.25);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-radius: var(--radius);
-      flex: 0 0 auto;
-    }
-
-    .nav-links a{
-      font-size: 13px;
-      font-weight: 650;
-      letter-spacing: -0.01em;
-      padding: 9px 12px;
-      border-radius: var(--radius);
-      color: rgba(255,255,255,0.82);
-      white-space: nowrap;
-    }
-
-    .nav-links a:hover{
-      background: rgba(255,255,255,0.08);
-      color: rgba(255,255,255,0.92);
     }
 
     .download{
@@ -211,6 +246,85 @@
     .download:hover{
       background: rgba(255,255,255,0.16);
       border-color: rgba(255,255,255,0.30);
+    }
+
+    .nav-menu-btn{
+      width: 44px;
+      height: 40px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(0,0,0,0.28);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      cursor: pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .nav-menu-btn:hover{
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.24);
+    }
+
+    .nav-menu-icon{
+      width: 18px;
+      height: 2px;
+      background: rgba(255,255,255,0.85);
+      border-radius: 999px;
+      position: relative;
+    }
+    .nav-menu-icon::before,
+    .nav-menu-icon::after{
+      content:"";
+      position:absolute;
+      left:0;
+      width: 18px;
+      height: 2px;
+      background: rgba(255,255,255,0.85);
+      border-radius: 999px;
+    }
+    .nav-menu-icon::before{ top: -6px; }
+    .nav-menu-icon::after{ top: 6px; }
+
+    /* Mobile sheet */
+    .nav-sheet{
+      max-width: var(--max);
+      margin: 10px auto 0;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      overflow:hidden;
+      display:none;
+    }
+
+    .nav-sheet-inner{
+      padding: 10px;
+      display:flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .nav-sheet-link{
+      padding: 12px 12px;
+      border-radius: 14px;
+      font-weight: 650;
+      letter-spacing: -0.01em;
+      color: rgba(255,255,255,0.86);
+      border: 1px solid rgba(255,255,255,0.00);
+      background: rgba(255,255,255,0.04);
+    }
+    .nav-sheet-link:hover{
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(255,255,255,0.10);
+    }
+
+    /* Desktop: hide hamburger + sheet */
+    @media (min-width: 740px){
+      .nav-menu-btn{ display:none; }
+      .nav-sheet{ display:none !important; }
     }
 
     /* HERO CONTENT */
@@ -453,7 +567,7 @@
       .section{ padding: 76px 0; }
     }
 
-    /* Tablet + down: stack nav + keep it readable */
+    /* Tablet + down */
     @media (max-width: 820px){
       :root{ --pad: 16px; }
       .grid{ gap: 12px; }
@@ -462,7 +576,6 @@
 
       /* Make nav wrap instead of squishing */
       .nav-inner{ flex-wrap: wrap; }
-      .nav-links{ width: 100%; justify-content: space-between; }
 
       /* Make card spans behave on smaller screens */
       .card[style*="grid-column: span 4"]{ grid-column: span 6 !important; }
@@ -478,18 +591,9 @@
 
       /* more comfortable hero spacing */
       .nav{ top: 14px; }
-      .nav-links{
-        padding: 6px;
-        gap: 6px;
-        flex-wrap: wrap;
-      }
-      .nav-links a{
-        padding: 10px 12px;
-        font-size: 12.5px;
-      }
+
       .download{
         padding: 10px 12px;
-        width: 100%;
         justify-content: center;
       }
 
@@ -514,224 +618,6 @@
       .bubble{ max-width: 100%; }
       .bubble[style]{ margin-left: 0 !important; }
     }
-
-    @media (max-width: 520px){
-  /* keep nav from feeling huge */
-  .nav{ top: 14px; }
-
-  .nav-inner{
-    gap: 10px;
-  }
-
-  /* Capsule: allow wrapping + reduce padding */
-  .nav-links{
-    width: 100%;
-    max-width: 520px;
-    display: flex;
-    flex-wrap: wrap;                 /* ✅ allow wrap */
-    justify-content: space-between;  /* keeps “How it works” left, “Use cases” right */
-    align-items: center;
-    gap: 8px;
-    padding: 10px;
-    border-radius: 22px;             /* less “stadium” looking */
-  }
-
-  /* Make the two links sit on row 1 */
-  .nav-links a:not(.download){
-    flex: 1 1 auto;
-    text-align: left;
-    padding: 10px 12px;
-    font-size: 13px;
-  }
-  .nav-links a:not(.download):last-of-type{
-    text-align: right;
-  }
-
-  /* Download takes full row 2 */
-  .nav-links .download{
-    flex: 1 0 100%;                  /* ✅ forces new line */
-    justify-content: center;
-    padding: 12px 14px;
-    margin-top: 2px;
-    border-radius: 18px;
-  }
-}
-
-    .nav{
-  position:absolute;
-  top: 22px;
-  left: 0; right: 0;
-  z-index: 10;
-  padding: 0 var(--pad);
-}
-
-.nav-inner{
-  max-width: var(--max);
-  margin: 0 auto;
-  display:flex;
-  align-items:center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.nav-actions{
-  display:flex;
-  align-items:center;
-  gap: 10px;
-}
-
-.nav-menu-btn{
-  width: 44px;
-  height: 40px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.18);
-  background: rgba(0,0,0,0.28);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  cursor: pointer;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.nav-menu-btn:hover{
-  background: rgba(255,255,255,0.06);
-  border-color: rgba(255,255,255,0.24);
-}
-
-.nav-menu-icon{
-  width: 18px;
-  height: 2px;
-  background: rgba(255,255,255,0.85);
-  border-radius: 999px;
-  position: relative;
-}
-.nav-menu-icon::before,
-.nav-menu-icon::after{
-  content:"";
-  position:absolute;
-  left:0;
-  width: 18px;
-  height: 2px;
-  background: rgba(255,255,255,0.85);
-  border-radius: 999px;
-}
-.nav-menu-icon::before{ top: -6px; }
-.nav-menu-icon::after{ top: 6px; }
-
-/* Mobile sheet */
-.nav-sheet{
-  max-width: var(--max);
-  margin: 10px auto 0;
-  border-radius: 18px;
-  border: 1px solid rgba(255,255,255,0.14);
-  background: rgba(0,0,0,0.35);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  overflow:hidden;
-  display:none;
-}
-
-.nav-sheet-inner{
-  padding: 10px;
-  display:flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.nav-sheet-link{
-  padding: 12px 12px;
-  border-radius: 14px;
-  font-weight: 650;
-  letter-spacing: -0.01em;
-  color: rgba(255,255,255,0.86);
-  border: 1px solid rgba(255,255,255,0.00);
-  background: rgba(255,255,255,0.04);
-}
-.nav-sheet-link:hover{
-  background: rgba(255,255,255,0.07);
-  border-color: rgba(255,255,255,0.10);
-}
-
-/* Desktop: hide hamburger + sheet, show your old nav-links if you keep them */
-@media (min-width: 740px){
-  .nav-menu-btn{ display:none; }
-  .nav-sheet{ display:none !important; }
-}
-
-/* Mobile tweaks */
-@media (max-width: 739px){
-  .brand span{ display:none; } /* optional, cleaner */
-}
-
-    /* Apple-style title inside the hero (NOT nav) */
-.hero-title{
-  position: absolute;
-  top: max(14px, env(safe-area-inset-top)); /* respects iPhone notch */
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 4; /* above background + overlay, below nav if needed */
-
-  height: 44px; /* iOS-ish */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  color: rgba(255,255,255,0.86);
-
-  pointer-events: none;
-  user-select: none;
-  text-rendering: optimizeLegibility;
-}
-
-/* If you want it even quieter on desktop */
-@media (min-width: 900px){
-  .hero-title{
-    color: rgba(255,255,255,0.78);
-  }
-}
-/* Floating app name in the HERO (not nav) */
-.hero-app-title{
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 4;
-
-  /* Put it in that “empty” hero space */
-  top: calc(env(safe-area-inset-top, 0px) + 56px);
-
-  height: 44px;                 /* iOS-ish */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  color: rgba(255,255,255,0.86);
-
-  pointer-events: none;
-  user-select: none;
-
-  /* Prevent overlap with your right-side pills on small screens */
-  max-width: calc(100% - 220px);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* Desktop: give it even more breathing room if you want */
-@media (min-width: 900px){
-  .hero-app-title{
-    top: calc(env(safe-area-inset-top, 0px) + 64px);
-    max-width: 70vw;
-  }
-}
-
-
   </style>
 </head>
 
@@ -741,45 +627,47 @@
     <!-- Desktop hero image -->
     <img class="hero-media" src="transverb-hero iv.png" alt="" aria-hidden="true" />
     <!-- Mobile hero image -->
-    <img class="hero-media-mobile" src="transverb-hero-mobile ii.png" alt="" aria-hidden="true" />
-    
+    <img class="hero-media-mobile" src="transverb-hero-mobile iii.png" alt="" aria-hidden="true" />
 
-   <nav class="nav" aria-label="Primary">
-  <div class="nav-inner">
-    <a class="brand" href="#top" aria-label="Transverb home">
-      <span class="brand-dot" aria-hidden="true"></span>
-      <span>Transverb</span>
-    </a>
-    
-    <div class="nav-actions">
-      <a class="download"
-         href="https://apps.apple.com/"
-         target="_blank"
-         rel="noopener noreferrer">
-        Download <span aria-hidden="true">↗</span>
-      </a>
-
-      <button class="nav-menu-btn" type="button" aria-label="Open menu" aria-expanded="false">
-        <span class="nav-menu-icon" aria-hidden="true"></span>
-      </button>
+    <!-- BIG HERO WORDMARK -->
+    <div class="hero-wordmark-wrap" aria-hidden="true">
+      <div class="hero-wordmark" data-text="Transverb">Transverb</div>
     </div>
-  </div>
 
-  <!-- Mobile menu sheet -->
-  <div class="nav-sheet" aria-hidden="true">
-    <div class="nav-sheet-inner">
-      <a href="#how" class="nav-sheet-link">How it works</a>
-      <a href="#use" class="nav-sheet-link">Use cases</a>
-      <a href="#demo" class="nav-sheet-link">See it in action</a>
-      <a href="#download" class="nav-sheet-link">Download</a>
-    </div>
-  </div>
-</nav>
+    <nav class="nav" aria-label="Primary">
+      <div class="nav-inner">
+        <a class="brand" href="#top" aria-label="Transverb home">
+          <span class="brand-dot" aria-hidden="true"></span>
+          <span>Transverb</span>
+        </a>
 
+        <div class="nav-actions">
+          <a class="download"
+             href="https://apps.apple.com/"
+             target="_blank"
+             rel="noopener noreferrer">
+            Download <span aria-hidden="true">↗</span>
+          </a>
+
+          <button class="nav-menu-btn" type="button" aria-label="Open menu" aria-expanded="false">
+            <span class="nav-menu-icon" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile menu sheet -->
+      <div class="nav-sheet" aria-hidden="true">
+        <div class="nav-sheet-inner">
+          <a href="#how" class="nav-sheet-link">How it works</a>
+          <a href="#use" class="nav-sheet-link">Use cases</a>
+          <a href="#demo" class="nav-sheet-link">See it in action</a>
+          <a href="#download" class="nav-sheet-link">Download</a>
+        </div>
+      </div>
+    </nav>
 
     <div class="hero-content">
       <div class="content-inner">
-
         <div class="kicker">Real-time messaging</div>
         <h1>Speak freely.<br/>Be understood.</h1>
         <p class="sub">
@@ -1032,29 +920,30 @@
       document.getElementById('year').textContent = new Date().getFullYear();
     </script>
   </footer>
+
   <script>
-  (function(){
-    const btn = document.querySelector('.nav-menu-btn');
-    const sheet = document.querySelector('.nav-sheet');
-    if(!btn || !sheet) return;
+    (function(){
+      const btn = document.querySelector('.nav-menu-btn');
+      const sheet = document.querySelector('.nav-sheet');
+      if(!btn || !sheet) return;
 
-    btn.addEventListener('click', () => {
-      const open = sheet.style.display === 'block';
-      sheet.style.display = open ? 'none' : 'block';
-      btn.setAttribute('aria-expanded', String(!open));
-      sheet.setAttribute('aria-hidden', String(open));
-    });
+      btn.addEventListener('click', () => {
+        const open = sheet.style.display === 'block';
+        sheet.style.display = open ? 'none' : 'block';
+        btn.setAttribute('aria-expanded', String(!open));
+        sheet.setAttribute('aria-hidden', String(open));
+      });
 
-    // close when clicking a link
-    sheet.addEventListener('click', (e) => {
-      const a = e.target.closest('a');
-      if(!a) return;
-      sheet.style.display = 'none';
-      btn.setAttribute('aria-expanded', 'false');
-      sheet.setAttribute('aria-hidden', 'true');
-    });
-  })();
-</script>
+      // close when clicking a link
+      sheet.addEventListener('click', (e) => {
+        const a = e.target.closest('a');
+        if(!a) return;
+        sheet.style.display = 'none';
+        btn.setAttribute('aria-expanded', 'false');
+        sheet.setAttribute('aria-hidden', 'true');
+      });
+    })();
+  </script>
 
 </body>
 </html>
