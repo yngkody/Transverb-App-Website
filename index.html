@@ -557,6 +557,114 @@
   }
 }
 
+    .nav{
+  position:absolute;
+  top: 22px;
+  left: 0; right: 0;
+  z-index: 10;
+  padding: 0 var(--pad);
+}
+
+.nav-inner{
+  max-width: var(--max);
+  margin: 0 auto;
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.nav-actions{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+}
+
+.nav-menu-btn{
+  width: 44px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(0,0,0,0.28);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  cursor: pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.nav-menu-btn:hover{
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.24);
+}
+
+.nav-menu-icon{
+  width: 18px;
+  height: 2px;
+  background: rgba(255,255,255,0.85);
+  border-radius: 999px;
+  position: relative;
+}
+.nav-menu-icon::before,
+.nav-menu-icon::after{
+  content:"";
+  position:absolute;
+  left:0;
+  width: 18px;
+  height: 2px;
+  background: rgba(255,255,255,0.85);
+  border-radius: 999px;
+}
+.nav-menu-icon::before{ top: -6px; }
+.nav-menu-icon::after{ top: 6px; }
+
+/* Mobile sheet */
+.nav-sheet{
+  max-width: var(--max);
+  margin: 10px auto 0;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  overflow:hidden;
+  display:none;
+}
+
+.nav-sheet-inner{
+  padding: 10px;
+  display:flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.nav-sheet-link{
+  padding: 12px 12px;
+  border-radius: 14px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  color: rgba(255,255,255,0.86);
+  border: 1px solid rgba(255,255,255,0.00);
+  background: rgba(255,255,255,0.04);
+}
+.nav-sheet-link:hover{
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.10);
+}
+
+/* Desktop: hide hamburger + sheet, show your old nav-links if you keep them */
+@media (min-width: 740px){
+  .nav-menu-btn{ display:none; }
+  .nav-sheet{ display:none !important; }
+}
+
+/* Mobile tweaks */
+@media (max-width: 739px){
+  .brand span{ display:none; } /* optional, cleaner */
+}
+
+
   </style>
 </head>
 
@@ -568,27 +676,38 @@
     <!-- Mobile hero image -->
     <img class="hero-media-mobile" src="transverb-hero-mobile ii.png" alt="" aria-hidden="true" />
 
-    <nav class="nav" aria-label="Primary">
-      <div class="nav-inner">
-        <a class="brand" href="#top" aria-label="Transverb home">
-          <span class="brand-dot" aria-hidden="true"></span>
-          <span>Transverb</span>
-        </a>
+   <nav class="nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a class="brand" href="#top" aria-label="Transverb home">
+      <span class="brand-dot" aria-hidden="true"></span>
+      <span>Transverb</span>
+    </a>
 
-        <div class="nav-links">
-          <a href="#how">How it works</a>
-          <a href="#use">Use cases</a>
+    <div class="nav-actions">
+      <a class="download"
+         href="https://apps.apple.com/"
+         target="_blank"
+         rel="noopener noreferrer">
+        Download <span aria-hidden="true">↗</span>
+      </a>
 
-          <!-- Replace with your real App Store URL -->
-          <a class="download"
-             href="https://apps.apple.com/us/app/transverb/id1606570882?platform=ipad"
-             target="_blank"
-             rel="noopener noreferrer">
-            Download <span aria-hidden="true">↗</span>
-          </a>
-        </div>
-      </div>
-    </nav>
+      <button class="nav-menu-btn" type="button" aria-label="Open menu" aria-expanded="false">
+        <span class="nav-menu-icon" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu sheet -->
+  <div class="nav-sheet" aria-hidden="true">
+    <div class="nav-sheet-inner">
+      <a href="#how" class="nav-sheet-link">How it works</a>
+      <a href="#use" class="nav-sheet-link">Use cases</a>
+      <a href="#demo" class="nav-sheet-link">See it in action</a>
+      <a href="#download" class="nav-sheet-link">Download</a>
+    </div>
+  </div>
+</nav>
+
 
     <div class="hero-content">
       <div class="content-inner">
@@ -844,5 +963,29 @@
       document.getElementById('year').textContent = new Date().getFullYear();
     </script>
   </footer>
+  <script>
+  (function(){
+    const btn = document.querySelector('.nav-menu-btn');
+    const sheet = document.querySelector('.nav-sheet');
+    if(!btn || !sheet) return;
+
+    btn.addEventListener('click', () => {
+      const open = sheet.style.display === 'block';
+      sheet.style.display = open ? 'none' : 'block';
+      btn.setAttribute('aria-expanded', String(!open));
+      sheet.setAttribute('aria-hidden', String(open));
+    });
+
+    // close when clicking a link
+    sheet.addEventListener('click', (e) => {
+      const a = e.target.closest('a');
+      if(!a) return;
+      sheet.style.display = 'none';
+      btn.setAttribute('aria-expanded', 'false');
+      sheet.setAttribute('aria-hidden', 'true');
+    });
+  })();
+</script>
+
 </body>
 </html>
