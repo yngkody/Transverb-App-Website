@@ -138,7 +138,8 @@
       position:absolute;
       left:0; right:0;
       /* lives in that circled “empty” space */
-      top: clamp(110px, 18vh, 190px);
+      /* pulled up so the hero doesn't feel like it's starting "below" the nav */
+      top: clamp(86px, 14vh, 150px);
       z-index: 3;
       padding: 0 var(--pad);
       pointer-events:none;
@@ -150,7 +151,8 @@
       margin: 0 auto;
       width: 100%;
       position: relative;
-      display: inline-block;
+      /* make it a real block so its left edge lines up with your other container text */
+      display: block;
 
       font-size: clamp(44px, 7vw, 92px);
       font-weight: 850;
@@ -181,7 +183,8 @@
       }
       .hero-wordmark{
         font-size: clamp(40px, 11vw, 64px);
-        max-width: 62vw;        /* prevents it from running into the phone area */
+        /* keep it away from the phone on the right */
+        max-width: 54vw;
         overflow: hidden;
         text-overflow: ellipsis;
       }
@@ -193,7 +196,7 @@
     /* NAV */
     .nav{
       position:absolute;
-      top: 22px;
+      top: 18px;
       left: 0; right: 0;
       z-index: 10;
       padding: 0 var(--pad);
@@ -206,6 +209,7 @@
       align-items:center;
       justify-content: space-between;
       gap: 12px;
+      min-height: 48px; /* keeps brand vertically centered relative to buttons */
     }
 
     .brand{
@@ -216,6 +220,7 @@
       opacity: 0.95;
       user-select:none;
       flex: 0 0 auto;
+      line-height: 1; /* fixes the weird baseline/vertical drift */
     }
 
     .brand-dot{
@@ -333,9 +338,10 @@
       z-index: 3;
       width: 100%;
       display:flex;
-      align-items:flex-end;
+      /* content was hugging the bottom which makes the top feel empty */
+      align-items:center;
       justify-content:center;
-      padding: 0 var(--pad) 64px;
+      padding: clamp(120px, 18vh, 210px) var(--pad) 56px;
     }
 
     .content-inner{
@@ -597,7 +603,7 @@
         justify-content: center;
       }
 
-      .hero-content{ padding: 0 var(--pad) 46px; }
+      .hero-content{ padding: calc(env(safe-area-inset-top, 0px) + 110px) var(--pad) 40px; }
       .kicker{ font-size: 12px; }
       h1{ font-size: clamp(32px, 9vw, 44px); }
       .sub{ max-width: 60ch; font-size: 15.5px; }
