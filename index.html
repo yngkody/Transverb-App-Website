@@ -733,9 +733,11 @@
 
 @media (max-width: 520px){
   .hero{
-    min-height: 92svh; /* instead of 100svh */
+    min-height: 100svh;
+    height: 100svh;
   }
 }
+
 
 /* FULL-SCREEN DEMO SHOWCASE */
 .demo-showcase {
@@ -753,6 +755,27 @@
   .demo-showcase {
     background-image: url("showcase-mobile.png");
   }
+}
+
+    .hero-media,
+.hero-media-mobile{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit: cover;          /* ✅ FULL BLEED */
+  object-position: center;
+  z-index: 0;
+  pointer-events:none;
+  user-select:none;
+}
+.hero{
+  min-height: 100svh;
+  height: 100svh;     /* 🔒 lock it */
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+  background: #000;
 }
 
 
