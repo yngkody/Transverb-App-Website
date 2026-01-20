@@ -737,19 +737,24 @@
   }
 }
 
-/* Full-bleed demo showcase (no text, no crop) */
-.demo-showcase{
-  width: 100%;
-  background: #000 url("showcase ii.png") center center / contain no-repeat;
-  border-top: 1px solid var(--hairline-2);
-  min-height: 72svh;
+/* FULL-SCREEN DEMO SHOWCASE */
+.demo-showcase {
+  width: 100vw;
+  height: 100svh; /* modern mobile-safe viewport */
+  background-color: #000;
+  background-image: url("showcase.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; /* fill entire screen */
 }
-@media (min-width: 900px){
-  .demo-showcase{ min-height: 78svh; }
+
+/* Mobile image swap */
+@media (max-width: 768px) {
+  .demo-showcase {
+    background-image: url("showcase-mobile.png");
+  }
 }
-@media (max-width: 520px){
-  .demo-showcase{ min-height: 56svh; }
-}
+
 
   </style>
 </head>
@@ -825,7 +830,7 @@
   </header>
 <!-- DEMO SHOWCASE (full-bleed image, no overlay text) -->
 
-  <section class="demo-showcase" id="demo" aria-label="Transverb app showcase"></section>
+<section class="demo-showcase" id="demo" aria-label="Transverb app demo"></section>
 
   <main>
     <!-- SEE IT IN ACTION -->
