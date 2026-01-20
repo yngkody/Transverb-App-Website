@@ -777,6 +777,43 @@
   overflow: hidden;
   background: #000;
 }
+/* App Store CTA in nav (left side) */
+.app-store-cta{
+  display: inline-flex;
+  align-items: center;
+}
+
+.app-store-cta img{
+  height: 32px;                 /* Apple-ish size */
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 6px 16px rgba(0,0,0,0.35));
+  transition: transform .15s ease, opacity .15s ease;
+}
+
+.app-store-cta:hover img{
+  transform: translateY(-1px);
+  opacity: 0.95;
+}
+
+/* Keep spacing clean */
+.brand{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Optional: slightly reduce visual weight of text logo */
+.brand-name{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+@media (max-width: 520px){
+  .app-store-cta img{
+    height: 28px;
+  }
+}
 
 
   </style>
@@ -796,10 +833,21 @@
 
    <nav class="nav" aria-label="Primary">
   <div class="nav-inner">
-    <a class="brand" href="#top" aria-label="Transverb home">
-      <span class="brand-dot" aria-hidden="true"></span>
-      <span>Transverb</span>
-    </a>
+   <div class="brand">
+  <a href="https://apps.apple.com/us/app/transverb/id1606570882?platform=ipad"
+     target="_blank"
+     rel="noopener noreferrer"
+     aria-label="Download Transverb on the App Store"
+     class="app-store-cta">
+    <img src="app-store-cta.png" alt="Download on the App Store" />
+  </a>
+
+  <a href="#top" aria-label="Transverb home" class="brand-name">
+    <span class="brand-dot" aria-hidden="true"></span>
+    <span>Transverb</span>
+  </a>
+</div>
+
     
     <div class="nav-actions">
       <a class="download"
